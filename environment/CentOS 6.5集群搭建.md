@@ -21,7 +21,7 @@
 ## CentOS网络配置
 1. 先临时性设置虚拟机ip地址：ifconfig eth0 192.168.0.191，在/etc/hosts文件中配置本地ip（192.168.0.191）到host（spark1）的映射
 2. 配置mac主机上的hosts文件：C/etc/hosts，192.168.0.191 spark1
-3. d在mac上使用ssh命令连接虚拟机
+3. d在mac上使用ssh命令连接虚拟机
 4. 永久性配置CentOS网络
 vi /etc/sysconfig/network-scripts/ifcfg-eth0
 DEVICE=eth0
@@ -41,18 +41,19 @@ service iptables stop<br>
 chkconfig iptables off<br>
 vi /etc/selinux/config<br>
 SELINUX=disabled<br>
-若有需要，可能同时要关闭mac的防火墙
+若有需要，可能同时要关闭mac的防火墙
 2. 配置dns服务器
 vi /etc/resolv.conf
 nameserver 61.139.2.69
 ping www.baidu.com
 
-## CentOS 6.5 yum配置
+## CentOS 6.5 yum配置
 1. 修改repo <br>
 使用WinSCP（网上很多，自己下一个），将CentOS6-Base-163.repo上传到CentOS中的/usr/local目录下<br>
 cd /etc/yum.repos.d/<br>
 rm -rf *<br>
-mv 自己的repo文件移动到/etc/yum.repos.d/目录中：cp /usr/local/CentOS6-Base-163.repo . <br>
+mv 自己的repo文件移动到/etc/yum.repos.d/目录中：
+cp /usr/local/CentOS6-Base-163.repo <br>
 修改repo文件，把所有gpgcheck属性修改为0<br>
 
 2. 配置yum <br>
@@ -73,17 +74,17 @@ source .bashrc
 4. 测试jdk安装是否成功：java -version
 5. rm -f /etc/udev/rules.d/70-persistent-net.rules
 
-## 安装第二台和第三台虚拟机
-1. 使用visual box的复制功能复制两个虚拟机。(要勾选重新初始化所有网卡的MAC地址)
-2. 在设置的网络配置页面找到新的mac地址，记录下来
-3. 编辑/etc/udev/rules.d/70-persistent-net.rules文件将name改为“eth0”
-4. 更改网卡配置文件，/etc/sysconfig/network-scripts/ifcfg-eth0,将HWADDR的值修改为/etc/udev/rules.d/70-persistent-net.rules文件中的新值(应该和步骤2中的mac地址值一样),同时修改IP地址为想要的地址（192.168.0.192，192.168.0.193）
+## 安装第二台和第三台虚拟机
+1. 使用visual box的复制功能复制两个虚拟机。(要勾选重新初始化所有网卡的MAC地址)
+2. 在设置的网络配置页面找到新的mac地址，记录下来
+3. 编辑/etc/udev/rules.d/70-persistent-net.rules文件将name改为“eth0”
+4. 更改网卡配置文件，/etc/sysconfig/network-scripts/ifcfg-eth0,将HWADDR的值修改为/etc/udev/rules.d/70-persistent-net.rules文件中的新值(应该和步骤2中的mac地址值一样),同时修改IP地址为想要的地址（192.168.0.192，192.168.0.193）
 5. 修改/etc/sysconfig/network，更改主机名（spark2,spark3）
 6. 重启系统
 ### 
- 在安装的时候，另外两台虚拟机的centos镜像文件必须重新拷贝一份，放在新的目录里，使用各自自己的镜像文件。虚拟机的硬盘文件也必须重新选择一个新的目录，以更好的区分。安装好之后，记得要在三台机器的/etc/hosts文件中，配置全三台机器的ip地址到hostname的映射，而不能只配置本机，这个很重要！在wmac的hosts文件中也要配置全三台机器的ip地址到hostname的映射。
+在安装的时候，另外两台虚拟机的centos镜像文件必须重新拷贝一份，放在新的目录里，使用各自自己的镜像文件。虚拟机的硬盘文件也必须重新选择一个新的目录，以更好的区分。安装好之后，记得要在三台机器的/etc/hosts文件中，配置全三台机器的ip地址到hostname的映射，而不能只配置本机，这个很重要！在wmac的hosts文件中也要配置全三台机器的ip地址到hostname的映射。
 
-## 配置集群ssh免密码登录
+## 配置集群ssh免密码登录
 1. 首先在三台机器上配置对本机的ssh免密码登录<br>
 生成本机的公钥，过程中不断敲回车即可，ssh-keygen命令默认会将公钥放在/root/.ssh目录下<br>
 `ssh-keygen -t rsa`
