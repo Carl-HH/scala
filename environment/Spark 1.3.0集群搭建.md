@@ -18,7 +18,7 @@ source .bashrc
 ``` shell
 export JAVA_HOME=/usr/java/latest
 export SCALA_HOME=/usr/local/scala
-export SPARK_MASTER_IP=192.168.1.107
+export SPARK_MASTER_IP=192.168.0.191
 export SPARK_WORKER_MEMORY=1g
 export HADOOP_CONF_DIR=/usr/local/hadoop/etc/hadoop
 ```
