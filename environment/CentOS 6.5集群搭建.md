@@ -23,6 +23,7 @@
 2. 配置mac主机上的hosts文件：C/etc/hosts，192.168.0.191 spark1
 3. d在mac上使用ssh命令连接虚拟机
 4. 永久性配置CentOS网络
+```shell
 vi /etc/sysconfig/network-scripts/ifcfg-eth0
 DEVICE=eth0
 TYPE=Ethernet
@@ -31,6 +32,7 @@ BOOTPROTO=static
 IPADDR=192.168.0.191
 NETMASK=255.255.255.0
 GATEWAY=192.168.0.1
+```
 5. 重启网卡
 service network restart
 6. 即使更换了ip地址，重启网卡，可能还是联不通网。那么可以先将IPADDR、NETMASK、GATEWAY给删除，将BOOTPROTO改成dhcp。然后用service network restart重启网卡。此时linux会自动给分配一个ip地址，用ifconfig查看分配的ip地址。然后再次按照之前说的，配置网卡，将ip改成自动分配的ip地址。最后再重启一次网卡。
@@ -44,7 +46,7 @@ SELINUX=disabled<br>
 若有需要，可能同时要关闭mac的防火墙
 2. 配置dns服务器
 vi /etc/resolv.conf
-nameserver 61.139.2.69
+nameserver 61.139.2.69<br>
 ping www.baidu.com
 
 ## CentOS 6.5 yum配置
