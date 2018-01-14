@@ -178,7 +178,6 @@ TimeLogger's constructor
 Student's constructor
 p: Student = Student@702361
 ```
-
 ## trait field的初始化
 >在scala中，trait是没有接收参数的构造函数的，这是trait与class的唯一区别，但是如果需求就是trait能够对field进行初始化，该怎么办呢？只能使用scala中非常特殊的一种高级特性--提前定义
 ``` scala code
