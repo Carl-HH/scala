@@ -1,8 +1,8 @@
 # spark集群启动
-## 启动Hadoop集群
-1. 格式化namenode：在spark1上执行以下命令，
+## 启动Hadoop集群
+1. 格式化namenode：在spark1上执行以下命令，
 `hdfs namenode -format`<br>
-2. 启动hdfs集群：`start-dfs.sh'
+2. 启动hdfs集群：`start-dfs.sh'
 3. 验证启动是否成功：jps、50070端口 <br>
 spark1：namenode、datanode、secondarynamenode<br>
 spark2：datanode<br>
